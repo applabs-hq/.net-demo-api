@@ -1,0 +1,16 @@
+{
+  "name": "Demo API",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:latest",
+  "features": {},
+  "forwardPorts": [5203],
+  "postCreateCommand": "dotnet restore",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "humao.rest-client"
+      ]
+    }
+  }
+}
