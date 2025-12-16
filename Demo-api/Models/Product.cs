@@ -6,5 +6,8 @@ public class Product
     public string Name { get; set; } = string.Empty;
     public double Tax { get; set; }
     public double Price { get; set; }
+    
+    // Navigation property
+    public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 }
 
