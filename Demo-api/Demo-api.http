@@ -1,6 +1,19 @@
 @Demo_api_HostAddress = http://localhost:5203
 
+### Get all orders
 GET {{Demo_api_HostAddress}}/Orders
+Accept: application/json
+
+###
+
+### Get order by id (success)
+GET {{Demo_api_HostAddress}}/Orders/ORD-0001
+Accept: application/json
+
+###
+
+### Get order by id (not found - 404)
+GET {{Demo_api_HostAddress}}/Orders/ORD-9999
 Accept: application/json
 
 ###

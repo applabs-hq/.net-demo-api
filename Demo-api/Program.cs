@@ -1,5 +1,6 @@
 using Demo_api.Data;
 using Demo_api.Repositories;
+using Demo_api.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -21,6 +22,9 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
 
 // Register repository
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+
+// Register services
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 

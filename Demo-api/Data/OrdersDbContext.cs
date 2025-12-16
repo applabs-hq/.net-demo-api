@@ -24,6 +24,35 @@ public class OrdersDbContext : DbContext
             entity.Property(e => e.Id).IsRequired();
             entity.Property(e => e.CurrencyCode).IsRequired().HasMaxLength(3);
             entity.Property(e => e.CreatedAtUTC).IsRequired();
+            
+            // Customer information
+            entity.Property(e => e.CustomerId).HasMaxLength(100);
+            entity.Property(e => e.CustomerName).HasMaxLength(200);
+            entity.Property(e => e.CustomerEmail).HasMaxLength(255);
+            entity.Property(e => e.CustomerPhone).HasMaxLength(50);
+            
+            // Shipping information
+            entity.Property(e => e.ShippingAddressLine1).HasMaxLength(200);
+            entity.Property(e => e.ShippingAddressLine2).HasMaxLength(200);
+            entity.Property(e => e.ShippingCity).HasMaxLength(100);
+            entity.Property(e => e.ShippingState).HasMaxLength(100);
+            entity.Property(e => e.ShippingPostalCode).HasMaxLength(20);
+            entity.Property(e => e.ShippingCountry).HasMaxLength(100);
+            entity.Property(e => e.ShippingMethod).HasMaxLength(100);
+            entity.Property(e => e.TrackingNumber).HasMaxLength(100);
+            
+            // Payment information
+            entity.Property(e => e.PaymentMethod).HasConversion<string>();
+            entity.Property(e => e.PaymentTransactionId).HasMaxLength(200);
+            
+            // Order status and metadata
+            entity.Property(e => e.Status).HasConversion<string>();
+            entity.Property(e => e.Notes).HasMaxLength(1000);
+            entity.Property(e => e.InternalNotes).HasMaxLength(1000);
+            entity.Property(e => e.SalesRepId).HasMaxLength(100);
+            entity.Property(e => e.SalesRepName).HasMaxLength(200);
+            entity.Property(e => e.ModifiedBy).HasMaxLength(100);
+            entity.Property(e => e.GiftMessage).HasMaxLength(500);
         });
 
         // Configure Product entity
