@@ -1,6 +1,6 @@
 {
   "name": "Demo API",
-  "image": "mcr.microsoft.com/devcontainers/dotnet:8",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
   "features": {},
   "forwardPorts": [5203],
   "postCreateCommand": "dotnet restore",
