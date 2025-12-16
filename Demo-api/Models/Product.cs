@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Demo_api.Models;
 
 public class Product
@@ -8,6 +10,7 @@ public class Product
     public double Price { get; set; }
     
     // Navigation property
+    [JsonIgnore]
     public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 }
 

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Demo_api.Models;
 
 public class OrderLine
@@ -11,6 +13,7 @@ public class OrderLine
     public string ProductId { get; set; } = string.Empty;
     
     // Navigation properties
+    [JsonIgnore]
     public Order Order { get; set; } = null!;
     public Product Product { get; set; } = null!;
 }
