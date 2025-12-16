@@ -32,19 +32,16 @@ public class OrdersController : ControllerBase
         // Create a pool of products with some duplicates
         var products = new List<Product>
         {
-            new Product { Id = "PROD-001", Tax = 0.15, Price = 29.99 },
-            new Product { Id = "PROD-002", Tax = 0.15, Price = 49.99 },
-            new Product { Id = "PROD-003", Tax = 0.15, Price = 19.99 },
-            new Product { Id = "PROD-004", Tax = 0.15, Price = 79.99 },
-            new Product { Id = "PROD-005", Tax = 0.15, Price = 39.99 },
-            new Product { Id = "PROD-001", Tax = 0.15, Price = 29.99 }, // Duplicate
-            new Product { Id = "PROD-006", Tax = 0.15, Price = 99.99 },
-            new Product { Id = "PROD-002", Tax = 0.15, Price = 49.99 }, // Duplicate
-            new Product { Id = "PROD-007", Tax = 0.15, Price = 14.99 },
-            new Product { Id = "PROD-008", Tax = 0.15, Price = 59.99 },
-            new Product { Id = "PROD-003", Tax = 0.15, Price = 19.99 }, // Duplicate
-            new Product { Id = "PROD-009", Tax = 0.15, Price = 89.99 },
-            new Product { Id = "PROD-010", Tax = 0.15, Price = 24.99 },
+            new Product { Id = "PROD-001", Name = "Classic Burger", Tax = 0.15, Price = 12.99 },
+            new Product { Id = "PROD-002", Name = "Cheese Burger", Tax = 0.15, Price = 14.99 },
+            new Product { Id = "PROD-003", Name = "Bacon Burger", Tax = 0.15, Price = 16.99 },
+            new Product { Id = "PROD-004", Name = "Double Burger", Tax = 0.15, Price = 18.99 },
+            new Product { Id = "PROD-005", Name = "Chicken Burger", Tax = 0.15, Price = 15.99 },
+            new Product { Id = "PROD-006", Name = "Coca Cola", Tax = 0.15, Price = 4.50 },
+            new Product { Id = "PROD-007", Name = "Fries", Tax = 0.15, Price = 5.99 },
+            new Product { Id = "PROD-008", Name = "Onion Rings", Tax = 0.15, Price = 6.99 },
+            new Product { Id = "PROD-009", Name = "Milkshake", Tax = 0.15, Price = 7.99 },
+            new Product { Id = "PROD-010", Name = "Sprite", Tax = 0.15, Price = 4.50 },
         };
 
         // Generate ~30 orders spanning back 3 days
@@ -72,6 +69,7 @@ public class OrdersController : ControllerBase
                     Product = new Product
                     {
                         Id = product.Id,
+                        Name = product.Name,
                         Tax = product.Tax,
                         Price = product.Price
                     },
