@@ -15,7 +15,7 @@
 
 If running locally:
 
-1. Ensure you have .NET 10.0 SDK installed.
+1. Ensure you have .NET 8.0 SDK installed.
 2. Clone the repository.
 3. Navigate to the Demo-api folder.
 4. Run `dotnet restore` to restore packages.
