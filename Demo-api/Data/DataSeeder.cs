@@ -7,7 +7,7 @@ public static class DataSeeder
     public static void SeedData(OrdersDbContext context)
     {
         // Check if data already exists
-        if (context.Products.Any() || context.Orders.Any())
+        if (context.Customers.Any() || context.Products.Any() || context.Orders.Any())
         {
             return; // Data already seeded
         }
@@ -15,6 +15,24 @@ public static class DataSeeder
         // Use a seeded random for deterministic results
         var random = new Random(42);
         var baseDate = new DateTime(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc);
+
+        // Create customers
+        var customers = new List<Customer>
+        {
+            new Customer { Id = "CUST-0001", Name = "John Smith", Email = "john.smith@example.com", Phone = "+64-21-555-1234" },
+            new Customer { Id = "CUST-0002", Name = "Jane Doe", Email = "jane.doe@example.com", Phone = "+64-22-555-2345" },
+            new Customer { Id = "CUST-0003", Name = "Bob Johnson", Email = "bob.johnson@example.com", Phone = "+64-23-555-3456" },
+            new Customer { Id = "CUST-0004", Name = "Alice Williams", Email = "alice.williams@example.com", Phone = "+64-24-555-4567" },
+            new Customer { Id = "CUST-0005", Name = "Charlie Brown", Email = "charlie.brown@example.com", Phone = "+64-25-555-5678" },
+            new Customer { Id = "CUST-0006", Name = "Diana Prince", Email = "diana.prince@example.com", Phone = "+64-26-555-6789" },
+            new Customer { Id = "CUST-0007", Name = "Eve Adams", Email = "eve.adams@example.com", Phone = "+64-27-555-7890" },
+            new Customer { Id = "CUST-0008", Name = "Frank Miller", Email = "frank.miller@example.com", Phone = "+64-28-555-8901" },
+            new Customer { Id = "CUST-0009", Name = "Grace Lee", Email = "grace.lee@example.com", Phone = "+64-29-555-9012" },
+            new Customer { Id = "CUST-0010", Name = "Henry Taylor", Email = "henry.taylor@example.com", Phone = "+64-20-555-0123" }
+        };
+
+        context.Customers.AddRange(customers);
+        context.SaveChanges();
 
         // Create products
         var products = new List<Product>
@@ -35,7 +53,6 @@ public static class DataSeeder
         context.SaveChanges();
 
         // Sample data for seeding
-        var customerNames = new[] { "John Smith", "Jane Doe", "Bob Johnson", "Alice Williams", "Charlie Brown", "Diana Prince", "Eve Adams", "Frank Miller" };
         var cities = new[] { "Auckland", "Wellington", "Christchurch", "Hamilton", "Tauranga", "Napier", "Dunedin", "Palmerston North" };
         var shippingMethods = new[] { "Standard", "Express", "Overnight", "Pickup" };
         var salesReps = new[] { ("SREP-001", "Sarah Connor"), ("SREP-002", "Mike Johnson"), ("SREP-003", "Lisa Anderson") };
@@ -49,7 +66,7 @@ public static class DataSeeder
             var minutesAgo = random.Next(0, 60);
             var createdAt = baseDate.AddHours(-hoursAgo).AddMinutes(-minutesAgo);
 
-            var customerName = customerNames[random.Next(customerNames.Length)];
+            var customer = customers[random.Next(customers.Count)];
             var city = cities[random.Next(cities.Length)];
             var (salesRepId, salesRepName) = salesReps[random.Next(salesReps.Length)];
             var status = (OrderStatus)random.Next(Enum.GetValues(typeof(OrderStatus)).Length);
@@ -64,10 +81,7 @@ public static class DataSeeder
                 CurrencyCode = "NZD",
                 
                 // Customer information
-                CustomerId = $"CUST-{random.Next(1000, 9999)}",
-                CustomerName = customerName,
-                CustomerEmail = $"{customerName.ToLower().Replace(" ", ".")}@example.com",
-                CustomerPhone = $"+64-{random.Next(20, 30)}-{random.Next(100, 999)}-{random.Next(1000, 9999)}",
+                CustomerId = customer.Id,
                 
                 // Shipping information
                 ShippingAddressLine1 = $"{random.Next(1, 999)} Main Street",
@@ -142,4 +156,3 @@ public static class DataSeeder
         context.SaveChanges();
     }
 }
-

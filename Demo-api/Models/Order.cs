@@ -25,11 +25,11 @@ public class Order
     public DateTime CreatedAtUTC { get; set; }
     public string CurrencyCode { get; set; } = "NZD";
     
-    // Customer information (surplus data)
+    // Customer information
     public string CustomerId { get; set; } = string.Empty;
-    public string CustomerName { get; set; } = string.Empty;
-    public string CustomerEmail { get; set; } = string.Empty;
-    public string CustomerPhone { get; set; } = string.Empty;
+    
+    // Navigation property
+    public Customer? Customer { get; set; }
     
     // Shipping information (surplus data)
     public string ShippingAddressLine1 { get; set; } = string.Empty;

@@ -12,10 +12,21 @@ public class OrdersDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderLine> OrderLines { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Customer> Customers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // Configure Customer entity
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).IsRequired();
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Phone).HasMaxLength(50);
+        });
 
         // Configure Order entity
         modelBuilder.Entity<Order>(entity =>
@@ -25,11 +36,12 @@ public class OrdersDbContext : DbContext
             entity.Property(e => e.CurrencyCode).IsRequired().HasMaxLength(3);
             entity.Property(e => e.CreatedAtUTC).IsRequired();
             
-            // Customer information
-            entity.Property(e => e.CustomerId).HasMaxLength(100);
-            entity.Property(e => e.CustomerName).HasMaxLength(200);
-            entity.Property(e => e.CustomerEmail).HasMaxLength(255);
-            entity.Property(e => e.CustomerPhone).HasMaxLength(50);
+            // Customer relationship
+            entity.Property(e => e.CustomerId).IsRequired().HasMaxLength(100);
+            entity.HasOne(e => e.Customer)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(e => e.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
             
             // Shipping information
             entity.Property(e => e.ShippingAddressLine1).HasMaxLength(200);
