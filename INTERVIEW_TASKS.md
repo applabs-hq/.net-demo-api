@@ -3,11 +3,6 @@
 ## Overview
 This document contains the first two tasks for the technical interview. You will be working with an existing .NET 8 Web API that manages orders, customers, products, and order lines.
 
-**Prerequisites:**
-- The solution should build and run successfully
-- Swagger UI should be accessible at `/swagger`
-- Sample data is automatically seeded on application startup
-
 ---
 
 ## Task 1: Implement Create Order Endpoint
@@ -33,7 +28,11 @@ Implement a `POST /orders` endpoint that allows creating new orders in the syste
    - Return `OrderDto` with HTTP 201 Created status
    - Include `Location` header pointing to the created resource
 
-3. **Business Logic**
+3. **Service Layer**
+   - Add `CreateOrderAsync(CreateOrderRequest request)` method to `IOrderService` and `OrderService`
+   - Add necessary methods to `IOrdersRepository` and `OrdersRepository` if needed
+
+4. **Business Logic**
    - Validate that the customer exists (return 400 Bad Request if not found)
    - Validate that all products exist (return 400 Bad Request if any product not found)
    - Generate a unique order ID (format: `ORD-XXXX` where XXXX is a 4-digit number)
@@ -48,14 +47,10 @@ Implement a `POST /orders` endpoint that allows creating new orders in the syste
      - `IsPaid` = false
      - `ShippingCost` = 0
 
-4. **Error Handling**
+5. **Error Handling**
    - Return 400 Bad Request for validation errors with descriptive messages
    - Return 500 Internal Server Error for unexpected errors
    - Log errors appropriately
-
-5. **Service Layer**
-   - Add `CreateOrderAsync(CreateOrderRequest request)` method to `IOrderService` and `OrderService`
-   - Add necessary methods to `IOrdersRepository` and `OrdersRepository` if needed
 
 ### Expected Behavior
 
